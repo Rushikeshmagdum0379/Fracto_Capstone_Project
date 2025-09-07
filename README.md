@@ -1,5 +1,9 @@
+
+
 # *Fracto – Project Setup & Backend Implementation*
-:date: *Date:* 08/09/2025
+# *Date:* *08/09/2025*
+
+For Informational Resource - https://drive.google.com/drive/folders/1CQDZ0V1c_7lP8YKgdlWUrYBYe6Qe6TKP?usp=sharing
 ---
 ## *1. Database Setup (SQL Server)*
 * Created *FractoDB* database in SQL Server.
