@@ -1,0 +1,102 @@
+<app-dashboard></app-dashboard>
+<div class="rate-doctors-container">
+  <div class="header">
+    <h2>Rate Your Doctors</h2>
+    <p class="subtitle">Share your experience with doctors you've visited</p>
+  </div>
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading your confirmed appointments...</p>
+  </div>
+  <!-- No appointments message -->
+  <div *ngIf="!isLoading && doctorsToRate.length === 0" class="empty-state">
+    <h3>No Doctors to Rate</h3>
+    <p>You don't have any confirmed appointments yet. Once you have confirmed appointments, you'll be able to rate your doctors here.</p>
+  </div>
+  <!-- Doctors grid -->
+  <div *ngIf="!isLoading && doctorsToRate.length > 0" class="doctors-grid">
+    <div class="doctor-card" *ngFor="let doctor of doctorsToRate" [class.already-rated]="doctor.alreadyRated">
+      <!-- Doctor header -->
+      <div class="doctor-header">
+        <div class="doctor-avatar">
+          <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor Avatar" />
+        </div>
+        <div class="doctor-info">
+          <h3>{{ doctor.doctorName }}</h3>
+          <p class="specialization">{{ doctor.specializationName }}</p>
+          <div class="appointment-info">
+            <span class="appointment-count">
+              {{ getAppointmentCount(doctor) }} appointment{{ getAppointmentCount(doctor) > 1 ? 's' : '' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Rating section -->
+      <div class="rating-section">
+        <!-- Already rated display -->
+        <div *ngIf="doctor.alreadyRated" class="current-rating">
+          <div class="rating-label">Your Rating:</div>
+          <div class="stars-display">
+            <span *ngFor="let star of getStarArray(5); let i = index"
+                  class="star"
+                  [class.filled]="i < doctor.existingRatingValue!">
+              ★
+            </span>
+            <span class="rating-value">({{ doctor.existingRatingValue }}/5)</span>
+          </div>
+          <!-- <button class="update-btn" (click)="doctor.alreadyRated = false">
+            Update Rating
+          </button> -->
+        </div>
+        <!-- Rating input -->
+        <div *ngIf="!doctor.alreadyRated" class="rating-input">
+          <div class="rating-label">Rate this doctor:</div>
+          <div class="stars-input">
+            <span *ngFor="let star of getStarArray(5); let i = index"
+                  class="star clickable"
+                  [class.filled]="i < doctor.selectedRating"
+                  [class.hover]="i < doctor.selectedRating"
+                  (click)="setRating(doctor, i + 1)"
+                  (mouseenter)="doctor.selectedRating = i + 1"
+                  [title]="(i + 1) + ' star' + (i > 0 ? 's' : '')">
+              ★
+            </span>
+          </div>
+          <div *ngIf="doctor.selectedRating > 0" class="rating-text">
+            {{ doctor.selectedRating }} out of 5 stars
+          </div>
+        </div>
+      </div>
+      <!-- Action buttons -->
+      <div class="action-section">
+        <button *ngIf="!doctor.alreadyRated"
+                class="submit-btn"
+                [disabled]="doctor.selectedRating === 0"
+                (click)="submitRating(doctor)">
+          <!-- <span *ngIf="doctor.existingRatingValue">Update Rating</span> -->
+          <span *ngIf="!doctor.existingRatingValue">Submit Rating</span>
+        </button>
+        <button *ngIf="doctor.alreadyRated"
+                class="rated-indicator"
+                disabled>
+          ✓ Rated
+        </button>
+      </div>
+      <!-- Appointment details (expandable) -->
+      <!-- <div class="appointment-details">
+        <details>
+          <summary>View Appointment Details</summary>
+          <div class="appointments-list">
+            <div *ngFor="let appointment of doctor.appointments" class="appointment-item">
+              <div class="appointment-date">
+                <strong>{{ formatDate(appointment.appointmentDate) }}</strong>
+              </div>
+              <div class="appointment-time">{{ appointment.timeSlot }}</div>
+            </div>
+          </div>
+        </details>
+      </div> -->
+    </div>
+  </div>
+</div>

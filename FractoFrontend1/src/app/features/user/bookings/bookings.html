@@ -1,0 +1,74 @@
+<app-dashboard></app-dashboard>
+<div class="bookings-container">
+  <h2>My Bookings</h2>
+  <!-- If no bookings -->
+  <div *ngIf="bookings.length === 0" class="no-bookings">
+    <p>No bookings found.</p>
+  </div>
+  <!--  Booked Appointments -->
+  <div *ngIf="bookedAppointments.length > 0">
+    <h3 class="section-title"><i class="fa-solid fa-calendar"></i> Booked Appointments</h3><br>
+    <div class="bookings-grid">
+      <div class="booking-card" *ngFor="let booking of bookedAppointments">
+        <div class="doctor-info">
+          <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor" />
+          <div class="doctor-details">
+            <h3>{{ booking.doctor?.name || 'Doctor #'+booking.doctorId }}</h3>
+            <p>{{ booking.doctor?.specialization || 'Specialization N/A' }}</p>
+          </div>
+        </div>
+        <div class="appointment-info">
+          <p><strong>Date: </strong> {{ booking.appointmentDate }}</p>
+          <p><strong>Time: </strong> {{ booking.timeSlot }}</p>
+          <p><strong>Status: </strong> <span class="status booked">{{ booking.status }}</span></p>
+        </div>
+        <div class="actions">
+          <button class="btn-cancel" (click)="cancelBooking(booking.appointmentId)">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!--  Confirmed Appointments -->
+  <div *ngIf="confirmedAppointments.length > 0">
+    <h3 class="section-title"><i class="fa-regular fa-calendar-check"></i> Confirmed Appointments</h3>
+    <br>
+    <div class="bookings-grid">
+      <div class="booking-card" *ngFor="let booking of confirmedAppointments">
+        <div class="doctor-info">
+          <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor" />
+          <div class="doctor-details">
+            <h3>{{ booking.doctor?.name || 'Doctor #'+booking.doctorId }}</h3>
+            <p>{{ booking.doctor?.specialization || 'Specialization N/A' }}</p>
+          </div>
+        </div>
+        <div class="appointment-info">
+          <p><strong>Date: </strong> {{ booking.appointmentDate }}</p>
+          <p><strong>Time: </strong> {{ booking.timeSlot }}</p>
+          <p><strong>Status: </strong> <span class="status confirmed">{{ booking.status }}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- Cancelled Appointments -->
+  <div *ngIf="cancelledAppointments.length > 0">
+    <h3 class="section-title"><i class="fa-solid fa-xmark"></i> Cancelled Appointments</h3><br>
+    <div class="bookings-grid">
+      <div class="booking-card" *ngFor="let booking of cancelledAppointments">
+        <div class="doctor-info">
+          <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor" />
+          <div class="doctor-details">
+            <h3>{{ booking.doctor?.name || 'Doctor #'+booking.doctorId }}</h3>
+            <p>{{ booking.doctor?.specialization || 'Specialization N/A' }}</p>
+          </div>
+        </div>
+        <div class="appointment-info">
+          <p><strong>Date: </strong> {{ booking.appointmentDate }}</p>
+          <p><strong>Time: </strong> {{ booking.timeSlot }}</p>
+          <p><strong>Status: </strong> <span class="status cancelled">{{ booking.status }}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

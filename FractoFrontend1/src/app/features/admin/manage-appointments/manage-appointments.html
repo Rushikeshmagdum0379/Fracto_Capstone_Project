@@ -1,0 +1,111 @@
+<app-dashboard></app-dashboard>
+<div class="appointments-container">
+  <div class="header">
+    <h2>Manage Appointments</h2>
+  </div>
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading appointments...</p>
+  </div>
+  <!-- Tab navigation -->
+  <div *ngIf="!isLoading" class="tab-navigation">
+    <button
+      class="tab-btn"
+      [class.active]="selectedTab === 'booked'"
+      (click)="switchTab('booked')"
+    >
+      Booked <span class="count">{{ getBookedCount() }}</span>
+    </button>
+    <button
+      class="tab-btn"
+      [class.active]="selectedTab === 'confirmed'"
+      (click)="switchTab('confirmed')"
+    >
+      Confirmed <span class="count">{{ getConfirmedCount() }}</span>
+    </button>
+    <button
+      class="tab-btn"
+      [class.active]="selectedTab === 'cancelled'"
+      (click)="switchTab('cancelled')"
+    >
+      Cancelled <span class="count">{{ getCancelledCount() }}</span>
+    </button>
+  </div>
+  <!-- Appointments table -->
+  <div *ngIf="!isLoading" class="appointments-content">
+    <div class="table-container">
+      <table class="appointments-table">
+        <thead>
+          <tr>
+            <th>Sr.No</th>
+            <th>Users</th>
+            <th>Doctors</th>
+            <th>Specialization</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th *ngIf="selectedTab === 'booked'" class="actions-header">Actions</th>
+            <th *ngIf="selectedTab === 'confirmed'" class="actions-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of getCurrentAppointments(); trackBy: trackByAppointmentId; let i = index">
+            <td class="appointment-id">{{ i+1}}</td>
+            <td class="patient-name">
+              <div class="user-info">
+                <span class="name">{{ appointment.userName }}</span>
+                <!-- <small class="user-id">ID: {{ appointment.userId }}</small> -->
+              </div>
+            </td>
+            <td class="doctor-name">{{ appointment.doctorName }}</td>
+            <td>
+              <span class="specialization-badge">
+                {{ appointment.specializationName }}
+              </span>
+            </td>
+            <td class="appointment-date">{{ formatDate(appointment.appointmentDate) }}</td>
+            <td class="time-slot">{{ appointment.timeSlot }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="getStatusClass(appointment.status)">
+                {{ appointment.status }}
+              </span>
+            </td>
+            <!-- Actions for Booked appointments -->
+            <td *ngIf="selectedTab === 'booked'" class="actions">
+              <button
+                class="btn-confirm"
+                (click)="confirmAppointment(appointment.appointmentId)"
+                title="Confirm Appointment"
+              >
+                ✓ Confirm
+              </button>
+              <button
+                class="btn-cancel"
+                (click)="cancelAppointment(appointment.appointmentId)"
+                title="Cancel Appointment"
+              >
+                ✕ Cancel
+              </button>
+            </td>
+            <!-- Actions for Confirmed appointments -->
+            <td *ngIf="selectedTab === 'confirmed'" class="actions">
+              <button
+                class="btn-cancel"
+                (click)="cancelAppointment(appointment.appointmentId)"
+                title="Cancel Appointment"
+              >
+                ✕ Cancel
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Empty state -->
+      <div *ngIf="getCurrentAppointments().length === 0" class="empty-state">
+        <h3>No {{ selectedTab }} appointments</h3>
+        <p>There are currently no appointments with "{{ selectedTab }}" status.</p>
+      </div>
+    </div>
+  </div>
+</div>

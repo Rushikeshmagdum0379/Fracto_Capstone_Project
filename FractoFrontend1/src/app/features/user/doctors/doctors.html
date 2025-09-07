@@ -1,0 +1,63 @@
+<app-dashboard></app-dashboard>
+<div class="page-container">
+    <!-- <h2 class="title">Available Doctors</h2> -->
+
+
+    <!-- 🔍 Search & Filter Bar -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search doctors by name, city, specialization, rating..."
+            [(ngModel)]="searchQuery" (input)="applySearch()" />
+        <button (click)="applySearch()">Search</button>
+    </div>
+
+    <div class="grid">
+        <div *ngFor="let doctor of filteredDoctors" class="doctor-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" class="avatar" />
+            <h3>{{ doctor.name }}</h3>
+            <p class="specialization">{{ doctor.specializationName }}</p>
+            <p class="exp">City: {{ doctor.city }}</p>
+            <!-- <p class="rating">Rating: {{ doctor.avgRating }}</p> -->
+            <!-- For stars -->
+            <div>
+                <span *ngFor="let star of [].constructor(5); let i = index">
+                    <i class="fa"
+                        [ngClass]="i < doctor.avgRating ? 'fa-star text-warning' : 'fa-star-o text-muted'"></i>
+                </span>
+            </div>
+            
+
+            <button class="book-btn" (click)="openBookingModal(doctor)">Book Appointment</button>
+        </div>
+    </div>
+</div>
+
+<!-- Booking Modal -->
+<div *ngIf="selectedDoctor" class="modal-overlay">
+    <div class="modal-container">
+        <h2 class="modal-title">Book Appointment</h2>
+        <div class="doctor-info">
+            <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor">
+            <div>
+                <h3>{{ selectedDoctor.name }}</h3>
+                <p><strong>{{ selectedDoctor.specializationName }}</strong> </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Select Date:</label>
+            <input type="date" [min]="today" [(ngModel)]="selectedDate" (change)="fetchSlots()" />
+        </div>
+        <div class="form-group" *ngIf="availableSlots.length > 0">
+            <label>Select Slot:</label>
+            <select [(ngModel)]="selectedSlot">
+                <option *ngFor="let slot of availableSlots" [value]="slot">
+                    {{ slot }}
+                </option>
+            </select>
+        </div>
+        <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+        <div class="modal-actions">
+            <button class="btn confirm" (click)="confirmBooking()">Confirm Booking</button>
+            <button class="btn cancel" (click)="closeModal()">Close</button>
+        </div>
+    </div>
+</div>

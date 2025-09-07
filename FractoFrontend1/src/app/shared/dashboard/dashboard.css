@@ -1,0 +1,48 @@
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 75px; /* Just below the navbar */
+    left: 0;
+    height: calc(100vh - 60px); /* Full height minus navbar height */
+    width: 220px;
+    /* background-color: black; */
+    background:#e1d9d1;
+  padding-top: 2rem;
+    color: white;
+    transition: width 0.3s;
+    z-index: 999; /* Sidebar overlaid on the navbar */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.sidebar ul li {
+    margin: 1.5rem 0;
+}
+
+.sidebar ul li a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #444;
+}
+
+
+ /* Navbar (already fixed component) */
+ app-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}

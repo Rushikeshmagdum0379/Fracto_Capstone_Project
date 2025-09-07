@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Doctors</title>
+  <link rel="stylesheet" href="./home.css">
+
+  <!-- for testimonials section -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="hero_section">
+
+    <!-- Header Section -->
+    <header class="header_section" id="home">
+      <div class="container">
+        <nav class="navbar">
+          <!-- <a class="logo" href="#">
+            <span>CropDeal</span>
+          </a> -->
+
+          <!-- <span style="font-weight: bold; font-size: 28px; color: #7ca794; padding-right: 2%;">
+            <i class="fas fa-seedling" style="color: #52b788;  "></i>
+            Doctor Logo<span style="color: #7ca794;"></span>
+          </span> -->
+          <img src="assets/images/FractoLogo.png" alt="logo" style="width: 150px; height: 120px;">
+
+
+
+          <ul class="nav_links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Testimonial</a></li>
+            <!-- <li><a href="/crops/crops">Doctors</a></li> -->
+            <!-- <li><a>Dashboard</a></li> -->
+
+            <!-- <li><a routerLink="/login">Login</a></li>
+            <li><a routerLink="/register">Register</a></li> -->
+
+            <li *ngIf="isLoggedIn()">
+              <a href="#" (click)="redirectToDashboard()">Dashboard</a>
+            </li>
+            <!-- Show username if logged in -->
+            <li *ngIf="isLoggedIn()" style="margin-right: 0px; ">
+              <i class="fas fa-user-alt"></i> <strong> {{ name }}</strong>
+            </li>
+            <!-- Show Login button if NOT logged in -->
+            <li *ngIf="!isLoggedIn()" style="margin-right: 0px;">
+              <a href="/login" class="btn"><i class="fas fa-user-alt"></i> Login</a>
+            </li>
+
+            <!-- Show Logout button if logged in -->
+            <li *ngIf="isLoggedIn()" style="margin-left: 10px;">
+              <a href="#" (click)="logout()" class="btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+
+
+
+            <!-- Login button if not logged in -->
+            <ng-template #loginButton>
+              <li><a href="/login" class="btn">Login</a></li>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="slider_section">
+      <div class="slider_content">
+        <h1>Find the Right Doctor, Anytime, Anywhere</h1>
+        <p>Discover trusted doctors near you by city, specialization, and availability.
+          Explore detailed profiles, check real patient
+          ratings, and book your appointment instantly—all in just a few taps.</p>
+        <a href="#" class="cta_button">Explore More</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Services section -->
+
+  <section class="services_section" id="services">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services-cards">
+        <div class="service-card">
+          <div class="icon-box">
+            <img class="w-[200px] h-[200px]" src="assets/images/doctor_consulation_booking.png" alt="Buy and Sell Icon">
+            <!-- <i class="fa-solid fa-calendar"></i> -->
+          </div>
+          <h3>Doctor Consultation Booking</h3>
+          <p>Easily book appointments with verified doctors based on specialty and availability.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon-box">
+            <img src="assets/images/stethoscope.png" alt="Subscribe Icon">
+          </div>
+          <h3>Doctor Profiles & Reviews</h3>
+          <p>Explore detailed doctor profiles with qualifications, experience, and patient feedback.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon-box">
+            <img src="assets/images/apoointment_scheduling.png" alt="Addons Icon">
+          </div>
+          <h3>Appointment Scheduling & Reminders</h3>
+          <p>Choose preferred time slots and get timely reminders
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="icon-box">
+            <img src="assets/images/specialist-selection.png" alt="Secure Payments Icon">
+          </div>
+          <h3>Specialist Selection</h3>
+          <p>Choose from a list of medical specializations to find the right expert for your needs.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon-box">
+            <img src="assets/images/confirmation.png" alt="Support Icon">
+          </div>
+          <h3> Appointment Confirmation & Management
+          </h3>
+          <p>Receive booking confirmation and manage or cancel appointments as needed</p>
+        </div>
+        <div class="service-card">
+          <div class="icon-box">
+            <img src="assets/images/rating-based.png" alt="User Dashboard Icon">
+          </div>
+          <h3>Ratings-Based Filtering
+          </h3>
+          <p>Filter doctors based on patient ratings to make informed choices</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- About section -->
+  <section class="about_section" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div class="detail-box">
+            <h3>ABOUT US</h3>
+            <!-- <h2>Empowering Farmers & Dealers</h2> -->
+            <p>Fracto connects patients with verified doctors across specializations, showcasing their
+              expertise and ratings. We empower doctors to reach more patients,
+              manage appointments easily, and build trust through a secure and reliable platform.</p>
+
+            <a href="#learn-more" class="btn-learn-more">LEARN MORE</a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="image-box">
+            <img class="large-image" src="assets/images/doctor.jpeg" alt="Image 1">
+            <img class="small-image" src="assets/images/image2.jpg" alt="Image 2">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <div class="testimonials-section" id="testimonials">
+    <h2>WHAT OUR CUSTOMERS SAYS</h2>
+    <div class="testimonial-container">
+      <div class="testimonial-slider">
+        <div class="testimonial-card">
+          <p class="customer-name">Rushikesh Magdum</p>
+          <p class="feedback">"Fracto has made doctor consultations so easy. I can quickly find
+            the right specialist, check available time slots, and book appointments in minutes.
+            The reminders and confirmation updates are very helpful, and I no longer worry about missing appointments."
+          </p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="customer-name">Aman Sutar</p>
+          <p class="feedback">"With Fracto, I don’t need to stand in queues or make endless phone
+            calls to book a doctor. The app’s rating system helps me choose trusted doctors, and the
+            smooth interface makes the whole process convenient and stress-free."
+          </p>
+        </div>
+        <div class="testimonial-card">
+          <p class="customer-name">Rohan Patil</p>
+          <p class="feedback">"Fracto has completely changed the way I consult doctors. The app is
+            simple, fast, and very user-friendly. I can easily book, cancel, or reschedule
+            appointments without any hassle."
+            .</p>
+        </div>
+
+
+        <div class="testimonial-card">
+          <p class="customer-name">Sayali Patil</p>
+          <p class="feedback">"I love how Fracto allows me to check doctor profiles and ratings before
+            booking. It gives me confidence in choosing the right specialist, and the reminders
+            ensure I never miss my appointments."
+            .
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Info Section -->
+  <section class="info_section">
+    <div class="container">
+      <div class="info_content">
+        <div class="info_item">
+          <h4>Address</h4>
+          <ul class="contact_details">
+            <li><i class="fa fa-map-marker"></i>A/P Sangli, Maharashtra, India</li>
+            <li><i class="fa fa-phone"></i> +91 9881314481</li>
+            <li><i class="fa fa-envelope"></i> support@fracto.com</li>
+          </ul>
+        </div>
+        <div class="info_item">
+          <h4>Quick Links</h4>
+          <ul class="quick_links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="info_item">
+          <h4>Subscribe</h4>
+          <form class="subscribe_form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="info_item">
+          <h4>Follow Us</h4>
+          <div class="social_links">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</body>
+
+
+
+</html>

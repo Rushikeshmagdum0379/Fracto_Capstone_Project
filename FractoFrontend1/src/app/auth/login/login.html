@@ -1,0 +1,65 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <!-- Left Side - Image Section -->
+    <div class="image-section">
+      <div class="image-placeholder">
+        <!-- You can replace this with your actual image -->
+        <img src="/assets/images/login.jpg" alt="Agriculture Image" class="login-image">
+        
+      </div>
+    </div>
+    <!-- Right Side - Login Form -->
+    <div class="form-section">
+      <div class="form-container">
+        <h3 class="form-title">Login</h3>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="input-group">
+            <label class="form-label">Username</label>
+            <input type="text" formControlName="username" class="form-control"
+                   placeholder="Enter your username"
+                   [ngClass]="{'is-invalid': f['username'].touched && f['username'].invalid}">
+            <div class="invalid-feedback" *ngIf="f['username'].errors?.['required']">
+              Username is required
+            </div>
+            <div class="invalid-feedback" *ngIf="f['username'].errors?.['minlength']">
+              At least 3 characters
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="form-label">Password</label>
+            <input type="password" formControlName="password" class="form-control"
+                   placeholder="Enter your password"
+                   [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}">
+            <div class="invalid-feedback" *ngIf="f['password'].errors?.['required']">
+              Password is required
+            </div>
+            <div class="invalid-feedback" *ngIf="f['password'].errors?.['minlength']">
+              At least 6 characters
+            </div>
+          </div>
+          <button class="btn-login" type="submit" [disabled]="loginForm.invalid">
+            Login
+          </button>
+        </form>
+        <div class="register-link">
+          <p>Don't have an account?</p>
+          <a routerLink="/register">Register here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,137 @@
+<div class="register-wrapper">
+  <div class="register-container">
+    <!-- Left Side - Image Section -->
+    <div class="image-section">
+      <div class="image-placeholder">
+        <!-- You can replace this with your actual image -->
+        <img src="/assets/images/register.jpg" alt="Agriculture Registration" class="register-image">
+        <!-- Fallback content if no image -->
+        
+      </div>
+    </div>
+    <!-- Right Side - Registration Form -->
+    <div class="form-section">
+      <div class="form-container">
+        <h2 class="form-title">Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+          <!-- Username -->
+          <div class="input-group">
+            <label class="form-label">Username</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+              placeholder="Enter your username"
+              [ngClass]="{ 'is-invalid': submitted && f['username'].invalid }"
+            />
+            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+              <div *ngIf="f['username'].errors['required']">Username is required</div>
+              <div *ngIf="f['username'].errors['minlength']">At least 3 characters</div>
+            </div>
+          </div>
+          <!-- Role -->
+          <div class="input-group">
+            <label class="form-label">Role</label>
+            <select
+              formControlName="role"
+              class="form-control form-select"
+              [ngClass]="{ 'is-invalid': submitted && f['role'].invalid }"
+            >
+              <option value="">-- Select Role --</option>
+              <!-- <option value="Admin">Admin</option> -->
+              <option value="User">User</option>
+            </select>
+            <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
+              <div *ngIf="f['role'].errors['required']">Role is required</div>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="input-group">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Enter your password"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].invalid }"
+            />
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+              <div *ngIf="f['password'].errors['required']">Password is required</div>
+              <div *ngIf="f['password'].errors['minlength']">At least 6 characters</div>
+            </div>
+          </div>
+          <!-- Confirm Password -->
+          <div class="input-group">
+            <label class="form-label">Confirm Password</label>
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Confirm your password"
+              [ngClass]="{ 'is-invalid': submitted && (f['confirmPassword'].invalid || registerForm.errors?.['mismatch']) }"
+            />
+            <div *ngIf="submitted && (f['confirmPassword'].errors || registerForm.errors?.['mismatch'])" class="invalid-feedback">
+              <div *ngIf="f['confirmPassword'].errors?.['required']">Confirm password is required</div>
+              <div *ngIf="registerForm.errors?.['mismatch']">Passwords must match</div>
+            </div>
+          </div>
+          <!-- Phone -->
+          <div class="input-group">
+            <label class="form-label">Phone Number</label>
+            <input
+              type="text"
+              formControlName="phoneNo"
+              class="form-control"
+              placeholder="Enter 10-digit phone number"
+              [ngClass]="{ 'is-invalid': submitted && f['phoneNo'].invalid }"
+            />
+            <div *ngIf="submitted && f['phoneNo'].errors" class="invalid-feedback">
+              <div *ngIf="f['phoneNo'].errors['required']">Phone number is required</div>
+              <div *ngIf="f['phoneNo'].errors['pattern']">Enter a valid 10-digit phone number</div>
+            </div>
+          </div>
+          <!-- City -->
+          <div class="input-group">
+            <label class="form-label">City</label>
+            <input
+              type="text"
+              formControlName="city"
+              class="form-control"
+              placeholder="Enter your city"
+              [ngClass]="{ 'is-invalid': submitted && f['city'].invalid }"
+            />
+            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+              <div *ngIf="f['city'].errors['required']">City is required</div>
+            </div>
+          </div>
+          <!-- Profile Image - Full Width -->
+          <div class="input-group full-width">
+            <label class="form-label">Profile Image <span class="optional">(optional)</span></label>
+            <input type="file" (change)="onFileChange($event)" class="form-control file-input" accept="image/*" />
+          </div>
+          <!-- Submit Button -->
+          <button type="submit" class="btn-register" [disabled]="loading">
+            <span *ngIf="loading">
+              <i class="fas fa-spinner fa-spin"></i> Registering...
+            </span>
+            <span *ngIf="!loading">
+              <i class="fas fa-user-plus"></i> Register
+            </span>
+          </button>
+          <div class="login-link">
+            <p>Already have an account?</p>
+            <a routerLink="/login">Login here</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

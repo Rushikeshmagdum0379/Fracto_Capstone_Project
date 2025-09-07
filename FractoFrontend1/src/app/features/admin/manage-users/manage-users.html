@@ -1,0 +1,50 @@
+<app-dashboard></app-dashboard>
+<div class="users-container">
+    <h2>Manage Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone No</th>
+          <th>City</th>
+          <th>Role</th>
+          <!-- <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{ i+ 1 }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.phoneNo }}</td>
+          <td>{{ user.city }}</td>
+          <td>{{ user.role }}</td>
+          <!-- <td>
+            <button class="btn-edit" (click)="openEditModal(user)">Edit</button>
+            <button class="btn-delete" (click)="deleteUser(user.userId)">Delete</button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Edit Modal -->
+  <div class="modal" *ngIf="selectedUser">
+    <div class="modal-content">
+      <h3>Edit User</h3>
+      <label>Name:</label>
+      <input [(ngModel)]="selectedUser.name" />
+      <label>Email:</label>
+      <input [(ngModel)]="selectedUser.emailId" />
+      <label>Role:</label>
+      <select [(ngModel)]="selectedUser.role">
+        <option value="User">User</option>
+      </select>
+      <label>Phone:</label>
+      <input [(ngModel)]="selectedUser.phoneNumber" />
+      <div class="modal-actions">
+        <button class="btn-save" (click)="saveUser()">Save</button>
+        <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  

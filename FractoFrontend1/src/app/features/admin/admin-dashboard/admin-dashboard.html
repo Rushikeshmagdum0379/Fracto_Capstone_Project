@@ -1,0 +1,58 @@
+<p>admin-dashboard works!</p>
+<app-dashboard></app-dashboard>
+<app-dashboard></app-dashboard>
+<div class="overview-container">
+    <h2>Welcome back</h2>
+    <div class="cards">
+      
+      <!-- Total Users -->
+      <div class="card card-green">
+        <div class="card-icon"><i class="fas fa-user"></i></div>
+        <div class="card-content">
+          <h3>Total Users</h3>
+          <p class="count">{{ totalUsers }}</p>
+        </div>
+      </div>
+      <!-- Total Doctors -->
+      <div class="card card-orange">
+        <div class="card-icon"><i class="fas fa-user-md"></i></div>
+        <div class="card-content">
+          <h3>Total Doctors</h3>
+          <p class="count">{{ totalDoctors }}</p>
+        </div>
+      </div>
+
+      <!-- Total Appointments -->
+      <div class="card card-blue">
+        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="card-content">
+          <h3>Total Appointments</h3>
+          <p class="count">{{ totalAppointments }}</p>
+        </div>
+      </div>
+
+      <div class="card card-purple">
+        <div class="card-icon"><i class="fas fa-calendar"></i></div>
+        <div class="card-content">
+          <h3>Booked Appointments</h3>
+          <p class="count">{{ bookedAppointments }}</p>
+        </div>
+      </div>
+      <div class="card card-green">
+        <div class="card-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="card-content">
+          <h3>Confirmed Appointments</h3>
+          <p class="count">{{ confirmedAppointments }}</p>
+        </div>
+      </div>
+      <div class="card card-orange">
+        <div class="card-icon"><i class="fa-solid fa-xmark"></i></div>
+        <div class="card-content">
+          <h3>Cancelled Appointments</h3>
+          <p class="count">{{ cancelledAppointments }}</p>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>

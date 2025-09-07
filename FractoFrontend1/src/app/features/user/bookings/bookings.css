@@ -1,0 +1,108 @@
+/* Main container */
+.bookings-container {
+    padding: 8%;
+    padding-right: 3%;
+    padding-left: 20%;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  /* Heading */
+  .bookings-container h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  /* No bookings message */
+  .no-bookings {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 50px;
+  }
+  /* Grid layout */
+  .bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  /* Card styling */
+  .booking-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+  }
+  .booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  /* Doctor info */
+  .doctor-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .doctor-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    margin-right: 15px;
+  }
+  .doctor-details h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+  }
+  .doctor-details p {
+    font-size: 14px;
+    color: #666;
+    margin: 3px 0 0;
+  }
+  /* Appointment info */
+  .appointment-info p {
+    font-size: 15px;
+    margin: 5px 0;
+    color: #444;
+  }
+  /* Status styling */
+  .status {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .confirmed {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  .booked {
+    background-color: #fef9c3;
+    color: #92400e;
+  }
+  .cancelled {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+  /* Actions */
+  .actions {
+    text-align: right;
+    margin-top: 15px;
+  }
+  .btn-cancel {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .btn-cancel:hover {
+    background-color: #dc2626;
+  }

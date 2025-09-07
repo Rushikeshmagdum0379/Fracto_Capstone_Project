@@ -1,0 +1,38 @@
+<app-dashboard></app-dashboard>
+<div class="overview-container">
+    <h2>Welcome back</h2>
+    <div class="cards">
+      <!-- Upcoming Appointments -->
+      <div class="card card-blue">
+        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="card-content">
+          <h3>My Bookings</h3>
+          <p class="count">{{ bookingsCount }}</p>
+        </div>
+      </div>
+      <!-- Confirmed Appointments -->
+      <div class="card card-green">
+        <div class="card-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="card-content">
+          <h3>Confirmed Appointments</h3>
+          <p class="count">{{ confirmedCount }}</p>
+        </div>
+      </div>
+      <!-- Total Doctors -->
+      <div class="card card-orange">
+        <div class="card-icon"><i class="fas fa-user-md"></i></div>
+        <div class="card-content">
+          <h3>Cancelled Appointments</h3>
+          <p class="count">{{  cancelledCount }}</p>
+        </div>
+      </div>
+      <!-- Rated Doctors -->
+      <div class="card card-purple">
+        <div class="card-icon"><i class="fas fa-star"></i></div>
+        <div class="card-content">
+          <h3>My Ratings</h3>
+          <p class="count">{{ ratingsCount }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

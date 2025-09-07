@@ -1,0 +1,166 @@
+<app-dashboard></app-dashboard>
+<div class="doctors-container">
+    <h2>Manage Doctors</h2>
+
+    <div class="actions">
+      <button class="btn-add" (click)="openAddModal()">+ Add Doctor</button>
+    </div>
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading doctors...</p>
+    </div>
+    <!-- Doctors table -->
+    <div *ngIf="!isLoading">
+      <table class="doctors-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Specialization</th>
+            <th>City</th>
+            <th>Rating</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doctor of doctors; let i = index; trackBy: trackByDoctorId">
+            <td>{{ i + 1 }}</td>
+            <td>{{ doctor.name }}</td>
+            <td>
+              <span class="specialization-badge">
+                {{ doctor.specializationName || 'Unknown' }}
+              </span>
+            </td>
+            <td>{{ doctor.city }}</td>
+            <td>
+              <span class="rating">
+                {{ doctor.rating | number:'1.1-1' }}
+              </span>
+            </td>
+            <td>
+              <button class="btn-edit" (click)="openEditModal(doctor)">Edit</button>
+              <button class="btn-delete" (click)="deleteDoctor(doctor.doctorId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Empty state -->
+      <div *ngIf="doctors.length === 0" class="empty-state">
+        <p>No doctors found.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Add Doctor Modal -->
+<div class="modal-overlay" *ngIf="isAddModalOpen" (click)="closeAddModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Add Doctor</h3>
+      <button class="close-btn" (click)="closeAddModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="newDoctorName">Name:</label>
+        <input id="newDoctorName" type="text" [(ngModel)]="newDoctor.name" class="form-input" required />
+      </div>
+      <div class="form-group">
+        <label for="specialization">Specialization:</label>
+        <select id="specialization" [(ngModel)]="newDoctor.specializationId" class="form-select" required>
+          <option value="">Select Specialization</option>
+          <option *ngFor="let spec of getSpecializationsList()" [value]="spec.specializationId">
+            {{ spec.specializationName }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="newDoctorCity">City:</label>
+        <input id="newDoctorCity" type="text" [(ngModel)]="newDoctor.city" class="form-input" required />
+      </div>
+      <div class="form-group">
+        <label for="newDoctorRating">Rating:</label>
+        <input id="newDoctorRating" type="number" [(ngModel)]="newDoctor.rating" class="form-input" min="0" max="5" step="0.1" />
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-save" (click)="addDoctor()" [disabled]="!newDoctor.name || !newDoctor.city || !newDoctor.specializationId">
+        Add Doctor
+      </button>
+      <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" *ngIf="selectedDoctor" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Edit Doctor</h3>
+        <button class="close-btn" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="doctorName">Name:</label>
+          <input
+            id="doctorName"
+            type="text"
+            [(ngModel)]="selectedDoctor.name"
+            class="form-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="specialization">Specialization:</label>
+          <select
+            id="specialization"
+            [(ngModel)]="selectedDoctor.specializationId"
+            (change)="onSpecializationChange($event)"
+            class="form-select"
+            required
+          >
+            <option value="">Select Specialization</option>
+            <option
+              *ngFor="let spec of getSpecializationsList()"
+              [value]="spec.specializationId"
+            >
+              {{ spec.specializationName }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="doctorCity">City:</label>
+          <input
+            id="doctorCity"
+            type="text"
+            [(ngModel)]="selectedDoctor.city"
+            class="form-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="doctorRating">Rating:</label>
+          <input
+            id="doctorRating"
+            type="number"
+            [(ngModel)]="selectedDoctor.rating"
+            class="form-input"
+            min="0"
+            max="5"
+            step="0.1"
+            readonly
+          />
+          <small class="form-help">Rating is calculated automatically</small>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button
+          class="btn-save"
+          (click)="saveDoctor()"
+          [disabled]="!selectedDoctor.name || !selectedDoctor.city || !selectedDoctor.specializationId"
+        >
+          Save Changes
+        </button>
+        <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>

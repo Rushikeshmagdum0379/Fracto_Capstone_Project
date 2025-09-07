@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+
+<div class="farmer-dashboard">
+    <!-- Navbar (already a separate component) -->
+    <app-navbar></app-navbar>
+
+    <!-- Sidebar and Main Content Wrapper -->
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <ul>
+                <li *ngIf="role === 'User'"><a href="/user-dashboard" ><i class="fa fa-home"></i> Dashboard</a></li>
+                <!-- <li><a href="/profile"><i class="fa fa-user"></i> Profile</a></li> -->
+                <li *ngIf="role === 'User'"><a href="/bookings"><i class="fa-solid fa-calendar-check"></i> My Bookings</a></li>
+                <li *ngIf="role === 'User'"><a href="/doctors"><i class="fa-solid fa-user-doctor"></i>View Doctors</a></li>
+                <li *ngIf="role === 'User'"><a href="/rate-doctor"><i class="fa-solid fa-star"></i>Rate Doctors</a></li>
+                <li *ngIf="role === 'User'"><a href="#" (click)="logout()"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+
+                <li *ngIf="role === 'Admin'"><a href="/admin-dashboard" ><i class="fa fa-home"></i> Dashboard</a></li>
+                <li *ngIf="role === 'Admin'"><a href="/manage-users" ><i class="fa-solid fa-user"></i>Users</a></li>
+                <li *ngIf="role === 'Admin'"><a href="/manage-doctors" ><i class="fa-solid fa-user-doctor"></i>Doctors</a></li>
+                <li *ngIf="role === 'Admin'"><a href="/manage-appointments"><i class="fa-solid fa-calendar-check"></i>Appointments</a></li>
+                <li *ngIf="role === 'Admin'"><a href="#" (click)="logout()"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+
+
+            </ul>
+        </div>           
